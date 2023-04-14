@@ -22,7 +22,19 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.title('news app final CAP 4104 ')
+st.title('News Stats')
+tab1, tab2 = st.tabs(["Top Articles in the Country",
+                           "Top Articles by State"])
+
+with tab1:
+   st.header("Recently in the US")
+   st.divider()
+
+with tab2:
+   st.selectbox("Chose a state")
+   st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
+
 col1, col2 = st.columns(2)
 
 
