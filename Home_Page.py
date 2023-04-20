@@ -39,18 +39,18 @@ with tab2:
     states = []
     for data in data:
         states += [data["state"]]
-    print(states)
     choseState = st.selectbox("Chose a state",
                               states)
-    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
     if choseState:
-        stateUrl = f"https://newsapi.org/v2/everything?q={choseState}&sortBy=relevancy&apiKey=0a54baab3c394337aa46d1ea286cfb24"
+        stateUrl = f"https://newsapi.org/v2/everything?q={choseState}&sortBy=relevancy" \
+                   f"&apiKey=0a54baab3c394337aa46d1ea286cfb24"
         s = requests.get(stateUrl).json()
         articles = s['articles']
         for article in articles:
             st.header(article['title'])
             st.markdown(
-                f"<span style='background-color:blue;padding:10px;border-radius:'> Published at: {article['publishedAt']}</span>",
+                f"<span style='background-color:blue;padding:10px;border-radius:'> "
+                f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             # st.write(article['publishedAt'])
             if article['author']:
@@ -58,7 +58,8 @@ with tab2:
             st.write(article['source']['name'])
             st.write(article['description'])
             st.write(article['url'])
-            st.image(article["urlToImage"])
+            if article["urlToImage"]:
+                st.image(article["urlToImage"])
 
 
 col1, col2 = st.columns(2)
@@ -76,7 +77,8 @@ if country and category and btn:
     # asking user for country input, ex us for us news and turns it into alpha_2 through user method
     # country= pycountry.countries.get(name=user).alpha_2
 
-    finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&category={category}&apiKey=0a54baab3c394337aa46d1ea286cfb24"
+    finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&category={category}" \
+               f"&apiKey=0a54baab3c394337aa46d1ea286cfb24"
     r = requests.get(finalURL).json()
     print(r["articles"][0])
     print(r)
@@ -84,7 +86,8 @@ if country and category and btn:
     for article in articles:
         st.header(article['title'])
         st.markdown(
-            f"<span style='background-color:blue;padding:10px;border-radius:'> Published at: {article['publishedAt']}</span>",
+            f"<span style='background-color:blue;padding:10px;border-radius:'> "
+            f"Published at: {article['publishedAt']}</span>",
             unsafe_allow_html=True)
         # st.write(article['publishedAt'])
         if article['author']:
