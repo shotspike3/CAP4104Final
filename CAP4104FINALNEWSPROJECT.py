@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import requests
+import json
 
 # import pycountry
 # from api import apiKEY
@@ -103,7 +104,7 @@ if newsr['HomePage']:
 #if newsr='HomePage':
     st.subheader("welcome")
     st.write("hi")
-else
+else:
     st.subheader("hello")
     st.write("hi")
 
@@ -132,8 +133,17 @@ if st.checkbox("list of topics..."):
     df
 
 #bar chart most reported topics by state
-data= {"states":[alabama', 'arizona', 'florida', 'california', ]}
- data= pd.DataFrame(data)
+f = open('states.json')
+
+data = json.load(f)
+
+states = []
+for data in data:
+    states += [data["state"]]
+
+
+data= {states}
+data= pd.DataFrame(data)
 st.bar_chart(data)
 #compare page: map and table to compare different state and country
 

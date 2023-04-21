@@ -28,8 +28,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.title('News Stats')
-tab1, tab2 = st.tabs(["Top Articles in the Country",
-                      "Top Articles by State"])
+tab1, tab2, tab3 = st.tabs(["Top Articles in the Country", "Top Articles by State", "🔍"])
 
 with tab1:
     st.header("Recently in the US")
@@ -43,7 +42,7 @@ with tab2:
                               states)
     if choseState:
         stateUrl = f"https://newsapi.org/v2/everything?q={choseState}&sortBy=relevancy" \
-                   f"&apiKey=0a54baab3c394337aa46d1ea286cfb24"
+                   f"&apiKey={apiKey}"
         s = requests.get(stateUrl).json()
         articles = s['articles']
         for article in articles:
@@ -60,6 +59,12 @@ with tab2:
             st.write(article['url'])
             if article["urlToImage"]:
                 st.image(article["urlToImage"])
+with tab3:
+    st.text_input(
+        "Placeholder for the other text input widget",
+        "This is a placeholder",
+        key="placeholder",
+    )
 
 
 col1, col2 = st.columns(2)
@@ -78,7 +83,7 @@ if country and category and btn:
     # country= pycountry.countries.get(name=user).alpha_2
 
     finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&category={category}" \
-               f"&apiKey=0a54baab3c394337aa46d1ea286cfb24"
+               f"&apiKey={apiKey}"
     r = requests.get(finalURL).json()
     print(r["articles"][0])
     print(r)
@@ -177,5 +182,3 @@ st.info('this allows you to search for news stories based off regional and langu
 
 # error
 st.error('please select your region of choice using the drop down menu')
-
-print(r)
