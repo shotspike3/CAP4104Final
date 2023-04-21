@@ -60,11 +60,38 @@ with tab2:
             if article["urlToImage"]:
                 st.image(article["urlToImage"])
 with tab3:
-    st.text_input(
-        "Placeholder for the other text input widget",
-        "This is a placeholder",
-        key="placeholder",
+
+    # Store the initial value of widgets in session state
+    if "visibility" not in st.session_state:
+        st.session_state.visibility = "visible"
+        st.session_state.disabled = False
+
+    text_input = st.text_input(
+        "Search",
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+        placeholder="Search for an Article"
     )
+
+    if text_input:
+        searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&sortBy=relevancy" \
+                   f"&apiKey={apiKey}"
+        s1 = requests.get(searchUrl).json()
+        articles = s1['articles']
+        for article in articles:
+            st.header(article['title'])
+            st.markdown(
+                f"<span style='background-color:blue;padding:10px;border-radius:'> "
+                f"Published at: {article['publishedAt']}</span>",
+                unsafe_allow_html=True)
+            # st.write(article['publishedAt'])
+            if article['author']:
+                st.write(article['author'])
+            st.write(article['source']['name'])
+            st.write(article['description'])
+            st.write(article['url'])
+            if article["urlToImage"]:
+                st.image(article["urlToImage"])
 
 
 col1, col2 = st.columns(2)
