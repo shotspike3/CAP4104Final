@@ -150,3 +150,8 @@ st.bar_chart(data)
 st.title('map to compare state/country')
 categories= ('STATE', 'COUNTRY')
 dropdown= st.multiselect('pick state or country', categories)
+
+#table
+disp_col.subheader('states to compare')
+
+dipl_col.subheader('countries to compare')
