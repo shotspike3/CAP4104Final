@@ -152,6 +152,8 @@ categories= ('STATE', 'COUNTRY')
 dropdown= st.multiselect('pick state or country', categories)
 
 #table
+sel_col, disp_col= st.beta_columns(2)
+
 disp_col.subheader('states to compare')
 
 dipl_col.subheader('countries to compare')
