@@ -29,14 +29,35 @@ text_input = st.text_input(
     placeholder="Search for an Article"
 )
 
-date1 = st.checkbox('Starting Date')
+date1 = st.checkbox('Would you like to limit it by release date', key="disabled")
+
+d = date.today
 
 if date1:
-    d = st.date_input(
-        "When\'s your birthday",
-        date.today()
-    )
-if text_input:
+    d = st.date_input("Will search for articles starting from this date", date.today())
+
+if text_input and d:
+    searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&from={d}&sortBy=relevancy" \
+                f"&apiKey={apiKey}"
+    s1 = requests.get(searchUrl).json()
+    articles = s1['articles']
+    for article in articles:
+        st.header(article['title'])
+        st.markdown(
+            f"<span style='background-color:blue;padding:10px;border-radius:'> "
+            f"Published at: {article['publishedAt']}</span>",
+            unsafe_allow_html=True)
+        # st.write(article['publishedAt'])
+        if article['author']:
+            st.write(article['author'])
+        st.write(article['source']['name'])
+        st.write(article['description'])
+        st.write(article['url'])
+        if article["urlToImage"]:
+            st.image(article["urlToImage"])
+
+
+elif text_input:
     searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&sortBy=relevancy" \
                 f"&apiKey={apiKey}"
     s1 = requests.get(searchUrl).json()
