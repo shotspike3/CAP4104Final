@@ -192,7 +192,7 @@ with tab2:
                     # if newsr='HomePage':
                     st.subheader("welcome")
                     st.write("hi")
-                else
+                else:
                     st.subheader("hello")
                     st.write("hi")
 
@@ -223,7 +223,7 @@ with tab2:
                 # bar chart most reported topics by state
                 data = ["Alaska", "Alabama", "Arkansas", "American Samoa", "Arizona", "California", "Colorado", "Connecticut", "District ", "of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky", "Louisiana", "Massachusetts", "Maryland", "Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina", "North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont", "Washington", "Wisconsin", "West Virginia", "Wyoming"]
 
-                                   data = pd.DataFrame(data)
+                data = pd.DataFrame(data)
                 st.bar_chart(data)
                 # compare page: map and table to compare different state and country
 
@@ -293,7 +293,7 @@ with tab2:
                 # if newsr='HomePage':
                     st.subheader("welcome")
                 st.write("hi- what articles are you looking for?")
-                else
+            else:
                 st.subheader("hello")
                 st.write("hi- what articles would you like to read today?")
 

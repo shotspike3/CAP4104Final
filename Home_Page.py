@@ -51,7 +51,8 @@ with tab1:
             articles = r['articles']
             for article in articles:
                 st.header(article['title'])
-                st.image(article["urlToImage"])
+                if article["urlToImage"]:
+                    st.image(article["urlToImage"])
                 st.write(article['publishedAt'])
                 if article['author']:
                     st.write(article['author'])
