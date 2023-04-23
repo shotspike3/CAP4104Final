@@ -30,8 +30,8 @@ countryoptions = st.multiselect('select by region', ['americas', 'europe', 'asia
 st.write(countryoptions)
 # map element
 # a map of news by region
-df = pd.read_csv('news-articles.csv',
-                 newscolumns=['title', 'article', 'publishdate'])
+df = pd.read_csv('../news-articles.csv',
+                 newscolumn=['title', 'article', 'publishdate'])
 
 df.columns = ['Source', 'Topic', 'Content']
 st.map(df)
@@ -45,7 +45,7 @@ regions = regions.set_index("region name")
 st.bar_chart(regions)
 
 # line chart
-newsinfo = pd.read_csv('news-articles.csv')
+newsinfo = pd.read_csv('../news-articles.csv')
 st.write(newsinfo.head())
 newsinfo = newsinfo.iloc[:, 1:]
 st.write(newsinfo.head())
