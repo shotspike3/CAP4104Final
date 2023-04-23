@@ -20,6 +20,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 st.header("Search")
 # Store the initial value of widgets in session state
 
@@ -40,45 +41,51 @@ if text_input and date1:
     searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&from={d}&sortBy=relevancy" \
                 f"&apiKey={apiKey}"
     s1 = requests.get(searchUrl).json()
-    if s1["totalResults"] == 0:
-        st.error("No Results where Found")
-        st.info("Try Refining your search and use keywords")
-    articles = s1['articles']
-    for article in articles:
-        st.header(article['title'])
-        st.markdown(
-            f"<span style='background-color:blue;padding:10px;border-radius:'> "
-            f"Published at: {article['publishedAt']}</span>",
-            unsafe_allow_html=True)
-        # st.write(article['publishedAt'])
-        if article['author']:
-            st.write(article['author'])
-        st.write(article['source']['name'])
-        st.write(article['description'])
-        st.write(article['url'])
-        if article["urlToImage"]:
-            st.image(article["urlToImage"])
+    if s1["status"] == "error":
+        st.error("There was an Error Fetching the Data, try Another Time")
+    else:
+        if s1["totalResults"] == 0:
+            st.error("No Results where Found")
+            st.info("Try Refining your search and use keywords")
+        articles = s1['articles']
+        for article in articles:
+            st.header(article['title'])
+            st.markdown(
+                f"<span style='background-color:blue;padding:10px;border-radius:'> "
+                f"Published at: {article['publishedAt']}</span>",
+                unsafe_allow_html=True)
+            # st.write(article['publishedAt'])
+            if article['author']:
+                st.write(article['author'])
+            st.write(article['source']['name'])
+            st.write(article['description'])
+            st.write(article['url'])
+            if article["urlToImage"]:
+                st.image(article["urlToImage"])
 
 
 elif text_input:
     searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&sortBy=relevancy" \
                 f"&apiKey={apiKey}"
     s1 = requests.get(searchUrl).json()
-    if s1["totalResults"] == 0:
-        st.error("No Results where Found")
-        st.info("Try Refining your search and use keywords")
-    articles = s1['articles']
-    for article in articles:
-        st.header(article['title'])
-        st.markdown(
-            f"<span style='background-color:blue;padding:10px;border-radius:'> "
-            f"Published at: {article['publishedAt']}</span>",
-            unsafe_allow_html=True)
-        # st.write(article['publishedAt'])
-        if article['author']:
-            st.write(article['author'])
-        st.write(article['source']['name'])
-        st.write(article['description'])
-        st.write(article['url'])
-        if article["urlToImage"]:
-            st.image(article["urlToImage"])
+    if s1["status"] == "error":
+        st.error("There was an Error Fetching the Data, try Another Time")
+    else:
+        if s1["totalResults"] == 0:
+            st.error("No Results where Found")
+            st.info("Try Refining your search and use keywords")
+        articles = s1['articles']
+        for article in articles:
+            st.header(article['title'])
+            st.markdown(
+                f"<span style='background-color:blue;padding:10px;border-radius:'> "
+                f"Published at: {article['publishedAt']}</span>",
+                unsafe_allow_html=True)
+            # st.write(article['publishedAt'])
+            if article['author']:
+                st.write(article['author'])
+            st.write(article['source']['name'])
+            st.write(article['description'])
+            st.write(article['url'])
+            if article["urlToImage"]:
+                st.image(article["urlToImage"])
