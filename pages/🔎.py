@@ -40,6 +40,9 @@ if text_input and date1:
     searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&from={d}&sortBy=relevancy" \
                 f"&apiKey={apiKey}"
     s1 = requests.get(searchUrl).json()
+    if s1["totalResults"] == 0:
+        st.error("No Results where Found")
+        st.info("Try Refining your search and use keywords")
     articles = s1['articles']
     for article in articles:
         st.header(article['title'])
@@ -61,6 +64,9 @@ elif text_input:
     searchUrl = f"https://newsapi.org/v2/everything?q={text_input}&sortBy=relevancy" \
                 f"&apiKey={apiKey}"
     s1 = requests.get(searchUrl).json()
+    if s1["totalResults"] == 0:
+        st.error("No Results where Found")
+        st.info("Try Refining your search and use keywords")
     articles = s1['articles']
     for article in articles:
         st.header(article['title'])
