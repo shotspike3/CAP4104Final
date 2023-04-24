@@ -39,12 +39,12 @@ The web app should use clear, legible fonts and have a layout that's easy on the
 
 We did this by choosing an easy font to read, making headers and dividing the web app into proper, consistent sections.
 
-###Consistency
+### Consistency
 The web app should have a consistent design and layout across all pages, with a clear hierarchy of information and consistent use of colors, fonts, and other visual elements.
 
 We did this by looking back on what we did and matching it to what we will do
 
-###Error prevention and recovery
+### Error prevention and recovery
 The web app should be designed to prevent errors, such as broken links or missing images, and provide clear feedback and guidance if an error does occur.
 
 We did this by testing the web app and seeing any errors that can occur and finding ways to either fix them or if it’s an API error notifying the user of what is happening.
