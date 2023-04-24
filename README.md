@@ -23,7 +23,7 @@ Users should be able to personalize their news feed by selecting their preferred
 ### Responsiveness
 The website should be responsive and load quickly, regardless of the device or internet connection speed.
 
-###Accessibility
+### Accessibility
 The website should be accessible to users with disabilities, including those who use screen readers, keyboard-only navigation, or other assistive technologies.
 
 ### Readability
@@ -36,7 +36,26 @@ The website should have a consistent design and layout across all pages, with a 
 The website should be designed to prevent errors, such as broken links or missing images, and provide clear feedback and guidance if an error does occur.
 
 ## Design process
-Discuss your design process, from sketching to implementation.
+### Define the problem 
+we Identified the target audience, user needs, and business objectives for the website. Conduct research to understand the competition, the market, and the user's needs.
+
+### Develop a concept
+Based on the research, create a high-level concept for the webapp, including the functionality, features, and user experience.
+
+### Sketch and wireframe
+Use sketches and wireframes to start developing the layout and design of the webapp. This phase should focus on the user experience and the flow of the website.
+
+### Create a visual design
+Using the wireframes as a basis, create a visual design that represents the look and feel of the webapp. This includes selecting color palettes, typography, images, and other visual elements.
+
+### Build the website
+Use the visual design to build the webapp using front-end and back-end web technologies, such as HTML, CSS, JavaScript, and server-side programming languages.
+
+### Test and iterate
+Conduct usability testing and gather feedback from users to identify areas of the webapp that need improvement. Use this feedback to make iterative changes to the design and functionality of the webapp.
+
+### Launch and maintain
+Once the webapp is complete, launch it to the public and continue to monitor and maintain the website. Collect analytics to measure the success of the website and make ongoing improvements to the user experience.
 
 ## API integration
 Explain how you utilized the APIs and discuss any challenges or limitations encountered.
