@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import streamlit as st
 import altair as alt
+import sys
 
 st.markdown(
     """
@@ -31,6 +32,9 @@ def get_sources(category):
     finalURL = f"https://newsapi.org/v2/top-headlines?country=us&category={category}" \
            f"&apiKey={apiKey}"
     r = requests.get(finalURL).json()
+    if r["status"] == "error":
+        st.error("There was an Error Fetching the data, please Try Again Later")
+        sys.exit()
     articles = r['articles']
     sources = [article['source']['name'] for article in articles]
     return sources
