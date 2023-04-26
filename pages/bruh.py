@@ -3,20 +3,24 @@ import requests
 import pandas as pd
 import pydeck as pdk
 import json
+import sys
 
 # Define the API URL and API key
 api_url = "https://newsapi.org/v2/everything"
-api_key = "8d40a72404ec4f20bc701b1afb95c89e"
+api_key = "c2dfe9677af7422aa2f8ae4aca2da0ce"
 f = open('states.json')
 
 states = json.load(f)
 
-
+"Articles published by each state"
 # Define a function to get the number of articles for a state
 def get_num_articles(state):
     # Make a request to the News API for the given state
     url = f"{api_url}?q={state}&sortBy=relevancy&apiKey={api_key}"
     response = requests.get(url).json()
+    if response["status"] == "error":
+        st.error("There was an Error Fetching the Data, try Another Time")
+        sys.exit()
 
     # Get the total number of results from the response
     total_results = response["totalResults"]
