@@ -55,13 +55,13 @@ if text_input and date1:
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             # st.write(article['publishedAt'])
+            if article["urlToImage"]:
+                st.image(article["urlToImage"])
             if article['author']:
                 st.write(article['author'])
             st.write(article['source']['name'])
             st.write(article['description'])
             st.write(article['url'])
-            if article["urlToImage"]:
-                st.image(article["urlToImage"])
 
 
 elif text_input:
@@ -82,10 +82,11 @@ elif text_input:
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             # st.write(article['publishedAt'])
+            if article["urlToImage"]:
+                st.image(article["urlToImage"])
             if article['author']:
                 st.write(article['author'])
             st.write(article['source']['name'])
             st.write(article['description'])
             st.write(article['url'])
-            if article["urlToImage"]:
-                st.image(article["urlToImage"])
+
