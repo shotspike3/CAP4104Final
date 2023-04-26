@@ -58,7 +58,7 @@ bar_chart = alt.Chart(df).mark_bar().encode(
     x="Sources:O",
     y="Number of Articles:Q",
 )
-
+"Number of Articles per Source"
 st.altair_chart(bar_chart, use_container_width=True)
 
 # Create data frame for article sources per category
@@ -69,5 +69,6 @@ for category in categories:
 df = pd.DataFrame(data)
 
 # Display data frame and allow user to resize it
+"Sources Per Category"
 st.checkbox("Use container width", value=False, key="use_container_width")
 st.dataframe(df, use_container_width=st.session_state.use_container_width)
