@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import json
 
 st.markdown(
     """
@@ -17,41 +18,53 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+f = open('pages/states.json')
+
+data = json.load(f)
+
+apiKey = '51a9947ce63a403d8eca7e3a3bc0ece6'
+
+
 country = "us"
+if country:
+    finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&apiKey=0a54baab3c394337aa46d1ea286cfb24"
+    r = requests.get(finalURL).json()
 
-category = st.selectbox('news category chosen:', ('technology', 'politics', 'sports', 'business'))
+    states = []
+    for data in data:
+        states += [data["state"]]
+    stateoptions = st.multiselect('select by state', states)
 
-finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&category={category}&apiKey=0a54baab3c394337aa46d1ea286cfb24"
-r = requests.get(finalURL).json()
+    if stateoptions:
+        stateUrl = f"https://newsapi.org/v2/everything?q={stateoptions}" \
+                       f"&apiKey={apiKey}"
+        s = requests.get(stateUrl).json()
+        articles = s['articles']
+        list = st.selectbox('Choose a topic',
+                            ('the', 'Abortion', 'Abstinence', 'Affirmative Action', 'Alternative medicine',
+                             'Animal Testing', 'Artificial intelligence', 'Assisted suicide', 'Atheism',
+                             'Biofuels', 'Book banning', 'Capital punishment', 'Censorship', 'Obesity',
+                             'Civil rights', 'Climate change', 'Cloning', 'Concealed weapons', 'Cryptocurrency'))
 
+        if list:
+            listUrl = f"https://newsapi.org/v2/everything?q={list}&apiKey={apiKey}"
+            l = requests.get(listUrl).json()
+            finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&apiKey=0a54baab3c394337aa46d1ea286cfb24"
+            r = requests.get(finalURL).json()
+            tot = l['totalResults']
+            total =l['articles']
+            print(tot)
+            st.write(tot)
 
-# multiselect
-countryoptions = st.multiselect('select by region', ['americas', 'europe', 'asia', 'africa'], ['americas'])
-st.write(countryoptions)
-# map element
-# a map of news by region
-df = pd.read_csv('../news-articles.csv',
-                 newscolumn=['title', 'article', 'publishdate'])
+# df = pd.DataFrame
+#     # map element
+#     # a map of news by state
+# df = pd.read_csv('news-articles.csv',
+#                  ['title', 'article', 'publishdate'])
+#
+# df.columns = ['Source', 'Topic', 'Content']
+# st.map(df)
 
-df.columns = ['Source', 'Topic', 'Content']
-st.map(df)
-# bar chart
-regions = {"news regions": ["americas", "europe", "asia"], "news articles by region": [2000, 1000, 4000]}
-
-regions = pd.DataFrame(regions)
-
-regions = regions.set_index("region name")
-
-st.bar_chart(regions)
-
-# line chart
-newsinfo = pd.read_csv('../news-articles.csv')
-st.write(newsinfo.head())
-newsinfo = newsinfo.iloc[:, 1:]
-st.write(newsinfo.head())
-st.line_chart(newsinfo)
-
-# button widget
 st.title("button")
 result = st.button("click me")
 st.write(result)
@@ -106,3 +119,5 @@ st.info('this allows you to search for news stories based off regional and langu
 
 # error
 st.error('please select your region of choice using the drop down menu')
+#
+# print(r)
