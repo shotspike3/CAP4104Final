@@ -49,11 +49,17 @@ with tab1:
             print(r["articles"][0])
             print(r)
             articles = r['articles']
-            for article in articles:
-                st.header(article['title'])
+            a = st.color_picker("Pick Published Date Color", "#777")
+        for article in articles:
+            st.header(article['title'])
+
+            st.markdown(
+                f"<span style='background-color:{a};padding:10px;border-radius:'> "
+                f"Published at: {article['publishedAt']}</span>",
+                unsafe_allow_html=True)
                 if article["urlToImage"]:
                     st.image(article["urlToImage"])
-                st.write(article['publishedAt'])
+                
                 if article['author']:
                     st.write(article['author'])
                 st.write(article['source']['name'])
@@ -74,12 +80,17 @@ with tab2:
             st.error("There was an Error Fetching the data, please Try Again Later")
         else:
             articles = s['articles']
-            for article in articles:
-                st.header(article['title'])
+            a = st.color_picker("Pick Published Date Color", "#777")
+        for article in articles:
+            st.header(article['title'])
+
+            st.markdown(
+                f"<span style='background-color:{a};padding:10px;border-radius:'> "
+                f"Published at: {article['publishedAt']}</span>",
+                unsafe_allow_html=True)
                 if article["urlToImage"]:
                     st.image(article["urlToImage"])
-                st.write(article['publishedAt'])
-                # st.write(article['publishedAt'])
+               
                 if article['author']:
                     st.write(article['author'])
                 st.write(article['source']['name'])
