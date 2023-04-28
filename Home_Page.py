@@ -9,7 +9,7 @@ data = json.load(f)
 
 # import pycountry
 # from api import apiKEY
-apiKey = '8d40a72404ec4f20bc701b1afb95c89e'
+apiKey = 'dec30b01a0414f7faa17f27d91602dca'
 
 
 st.markdown(

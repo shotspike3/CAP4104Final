@@ -5,9 +5,27 @@ import pydeck as pdk
 import json
 import sys
 
+
+
+st.markdown(
+    """
+    <style>
+        [data-testid="stSidebarNav"]::before {
+            content: "News API";
+            margin-left: 20px;
+            margin-top: 20px;
+            font-size: 30px;
+            position: relative;
+            top: 20px;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Define the API URL and API key
 api_url = "https://newsapi.org/v2/everything"
-api_key = "c2dfe9677af7422aa2f8ae4aca2da0ce"
+api_key = "dec30b01a0414f7faa17f27d91602dca"
 f = open('states.json')
 
 states = json.load(f)

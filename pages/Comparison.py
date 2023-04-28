@@ -22,7 +22,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-apiKey = '8d40a72404ec4f20bc701b1afb95c89e'
+apiKey = 'dec30b01a0414f7faa17f27d91602dca'
 
 st.title("How many Articles had these topics mentioned in there date")
 country = "us"
@@ -52,27 +52,6 @@ if country:
         counts_by_date = df['date'].value_counts().sort_index()
         st.line_chart(counts_by_date)
 
-
-
-st.markdown(
-    """
-    <style>
-        [data-testid="stSidebarNav"]::before {
-            content: "News API";
-            margin-left: 20px;
-            margin-top: 20px;
-            font-size: 30px;
-            position: relative;
-            top: 20px;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-
-# Set up API key and categories
-apiKey = "8d40a72404ec4f20bc701b1afb95c89e"
 categories = ['technology', 'politics', 'sports', 'business',
               'entertainment', 'health', 'general']
 
