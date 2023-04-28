@@ -51,7 +51,7 @@ if text_input and date1:
         for article in articles:
             st.header(article['title'])
             st.markdown(
-                f"<span style='background-color:blue;padding:10px;border-radius:'> "
+                f"<span style='background-color:yellow;padding:10px;border-radius:'> "
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             # st.write(article['publishedAt'])
@@ -78,7 +78,7 @@ elif text_input:
         for article in articles:
             st.header(article['title'])
             st.markdown(
-                f"<span style='background-color:blue;padding:10px;border-radius:'> "
+                f"<span style='background-color:yellow;padding:10px;border-radius:'> "
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             # st.write(article['publishedAt'])
