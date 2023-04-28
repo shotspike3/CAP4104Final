@@ -2,7 +2,7 @@ from datetime import date
 import requests
 import streamlit as st
 
-apiKey = '0a54baab3c394337aa46d1ea286cfb24'
+apiKey = '8d40a72404ec4f20bc701b1afb95c89e'
 
 st.markdown(
     """
@@ -51,9 +51,12 @@ if text_input and date1:
         a = st.color_picker("Pick Published Date Color", "#777")
         for article in articles:
             st.header(article['title'])
-
             st.markdown(
                 f"<span style='background-color:{a};padding:10px;border-radius:'> "
+            )
+            st.color_picker()
+            st.markdown(
+                f"<span style='background-color:#770;padding:10px;border-radius:'> "
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             if article["urlToImage"]:

@@ -9,7 +9,7 @@ data = json.load(f)
 
 # import pycountry
 # from api import apiKEY
-apiKey = '0a54baab3c394337aa46d1ea286cfb24'
+apiKey = '8d40a72404ec4f20bc701b1afb95c89e'
 
 
 st.markdown(
@@ -33,7 +33,7 @@ tab1, tab2 = st.tabs(["Top Articles in the Country", "Top Articles by State"])
 with tab1:
     st.header("Recently in the US")
     country = "us"
-    category = st.selectbox('Choose A News Category', ('technology', 'politics', 'sports', 'business',
+    category = st.radio('Choose A News Category', ('technology', 'politics', 'sports', 'business',
                                                    'entertainment', 'health', 'general'))
 
     if country and category:
@@ -47,19 +47,18 @@ with tab1:
             st.error("There was an Error Fetching the data, please Try Again Later")
         else:
             print(r["articles"][0])
+            a = st.color_picker("Pick Published Date Color", "#777")
             print(r)
             articles = r['articles']
-            a = st.color_picker("Pick Published Date Color", "#777")
-        for article in articles:
-            st.header(article['title'])
-
-            st.markdown(
-                f"<span style='background-color:{a};padding:10px;border-radius:'> "
-                f"Published at: {article['publishedAt']}</span>",
-                unsafe_allow_html=True)
+            for article in articles:
+                st.header(article['title'])
+                st.markdown(
+                    f"<span style='background-color:{a};padding:10px;border-radius:'> "
+                    f"Published at: {article['publishedAt']}</span>",
+                    unsafe_allow_html=True)
                 if article["urlToImage"]:
                     st.image(article["urlToImage"])
-                
+                st.write(article['publishedAt'])
                 if article['author']:
                     st.write(article['author'])
                 st.write(article['source']['name'])
@@ -79,18 +78,18 @@ with tab2:
         if s["status"] == "error":
             st.error("There was an Error Fetching the data, please Try Again Later")
         else:
+            b = st.color_picker("Pick Published Date Color", f"{a}", "bruh")
             articles = s['articles']
-            a = st.color_picker("Pick Published Date Color", "#777")
-        for article in articles:
-            st.header(article['title'])
-
-            st.markdown(
-                f"<span style='background-color:{a};padding:10px;border-radius:'> "
-                f"Published at: {article['publishedAt']}</span>",
-                unsafe_allow_html=True)
+            for article in articles:
+                st.header(article['title'])
                 if article["urlToImage"]:
                     st.image(article["urlToImage"])
-               
+                st.markdown(
+                    f"<span style='background-color:{b};padding:10px;border-radius:'> "
+                    f"Published at: {article['publishedAt']}</span>",
+                    unsafe_allow_html=True)
+                st.write(article['publishedAt'])
+                # st.write(article['publishedAt'])
                 if article['author']:
                     st.write(article['author'])
                 st.write(article['source']['name'])

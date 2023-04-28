@@ -1,78 +1,62 @@
-import numpy as np
-import pandas as pd
-import requests
 import streamlit as st
-import altair as alt
+import requests
+import pandas as pd
+import pydeck as pdk
+import json
 import sys
 
-st.markdown(
-    """
-    <style>
-        [data-testid="stSidebarNav"]::before {
-            content: "News API";
-            margin-left: 20px;
-            margin-top: 20px;
-            font-size: 30px;
-            position: relative;
-            top: 20px;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# Define the API URL and API key
+api_url = "https://newsapi.org/v2/everything"
+api_key = "c2dfe9677af7422aa2f8ae4aca2da0ce"
+f = open('states.json')
 
+states = json.load(f)
 
-# Set up API key and categories
-apiKey = "0a54baab3c394337aa46d1ea286cfb24"
-categories = ['technology', 'politics', 'sports', 'business',
-              'entertainment', 'health', 'general']
-
-# Define function to get sources for a given category
-def get_sources(category):
-    finalURL = f"https://newsapi.org/v2/top-headlines?country=us&category={category}" \
-           f"&apiKey={apiKey}"
-    r = requests.get(finalURL).json()
-    if r["status"] == "error":
-        st.error("There was an Error Fetching the data, please Try Again Later")
+"Articles published by each state"
+# Define a function to get the number of articles for a state
+def get_num_articles(state):
+    # Make a request to the News API for the given state
+    url = f"{api_url}?q={state}&sortBy=relevancy&apiKey={api_key}"
+    response = requests.get(url).json()
+    if response["status"] == "error":
+        st.error("There was an Error Fetching the Data, try Another Time")
         sys.exit()
-    articles = r['articles']
-    sources = [article['source']['name'] for article in articles]
-    return sources
+
+    # Get the total number of results from the response
+    total_results = response["totalResults"]
+
+    return total_results
 
 
-# Get sources for all categories and combine into a single list
-sources = []
-for category in categories:
-    sources += get_sources(category)
+# Create a DataFrame of the state data
+state_data = pd.DataFrame(states)
 
-# Count sources and create chart
-source_count = {}
-for word in sources:
-    if word in source_count:
-        source_count[word] += 1
-    else:
-        source_count[word] = 1
+# Add a column for the number of articles for each state
+state_data["num_articles"] = state_data["state"].apply(get_num_articles)
 
-df = pd.DataFrame({
-    "Sources": list(source_count.keys()),
-    "Number of Articles": list(source_count.values())
-})
-
-bar_chart = alt.Chart(df).mark_bar().encode(
-    x="Sources:O",
-    y="Number of Articles:Q",
+# Define the PyDeck layer for the map
+layer = pdk.Layer(
+    "ScatterplotLayer",
+    state_data,
+    get_position=["longitude", "latitude"],
+    get_radius="num_articles",
+    get_fill_color=[255, 0, 0, 255],
+    pickable=True,
+    auto_highlight=True,
 )
-"Number of Articles per Source"
-st.altair_chart(bar_chart, use_container_width=True)
 
-# Create data frame for article sources per category
-data = {}
-for category in categories:
-    data[category.title()] = get_sources(category)
+# Define the PyDeck view for the map
+view_state = pdk.ViewState(
+    longitude=-96,
+    latitude=37.5,
+    zoom=3,
+    min_zoom=3,
+    max_zoom=15,
+)
 
-df = pd.DataFrame(data)
-
-# Display data frame and allow user to resize it
-"Sources Per Category"
-st.checkbox("Use container width", value=False, key="use_container_width")
-st.dataframe(df, use_container_width=st.session_state.use_container_width)
+# Render the map with Streamlit
+st.pydeck_chart(pdk.Deck(
+    layers=[layer],
+    initial_view_state=view_state,
+    tooltip={"text": "{state}: {num_articles} articles"},
+))
