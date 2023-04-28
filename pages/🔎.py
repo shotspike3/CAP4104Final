@@ -48,13 +48,14 @@ if text_input and date1:
             st.error("No Results where Found")
             st.info("Try Refining your search and use keywords")
         articles = s1['articles']
+        a = st.color_picker("Pick Published Date Color", "#777")
         for article in articles:
             st.header(article['title'])
+
             st.markdown(
-                f"<span style='background-color:yellow;padding:10px;border-radius:'> "
+                f"<span style='background-color:{a};padding:10px;border-radius:'> "
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
-            # st.write(article['publishedAt'])
             if article["urlToImage"]:
                 st.image(article["urlToImage"])
             if article['author']:
@@ -75,13 +76,14 @@ elif text_input:
             st.error("No Results where Found")
             st.info("Try Refining your search and use keywords")
         articles = s1['articles']
+        a = st.color_picker("Pick Published Date Color", "#777")
         for article in articles:
             st.header(article['title'])
+
             st.markdown(
-                f"<span style='background-color:yellow;padding:10px;border-radius:'> "
+                f"<span style='background-color:{a};padding:10px;border-radius:'> "
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
-            # st.write(article['publishedAt'])
             if article["urlToImage"]:
                 st.image(article["urlToImage"])
             if article['author']:
