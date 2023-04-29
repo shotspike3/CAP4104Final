@@ -22,7 +22,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-apiKey = 'dec30b01a0414f7faa17f27d91602dca'
+apiKey = '7e11b8f6cbf740f69e253605a9b4eea0'
 
 st.title("How many Articles had these topics mentioned in there date")
 country = "us"
@@ -30,7 +30,7 @@ if country:
     finalURL = f"https://newsapi.org/v2/top-headlines?country={country}&apiKey={apiKey}"
     r = requests.get(finalURL).json()
 
-    topicoptions = ('the', 'Abortion', 'Abstinence', 'Affirmative Action', 'Alternative medicine',
+    topicoptions = ('Abortion', 'Abstinence', 'Affirmative Action', 'Alternative medicine',
                     'Animal Testing', 'Artificial intelligence', 'Assisted suicide', 'Atheism',
                     'Biofuels', 'Book banning', 'Capital punishment', 'Censorship', 'Obesity',
                     'Civil rights', 'Climate change', 'Cloning', 'Concealed weapons', 'Cryptocurrency')

@@ -25,7 +25,7 @@ st.markdown(
 
 # Define the API URL and API key
 api_url = "https://newsapi.org/v2/everything"
-api_key = "dec30b01a0414f7faa17f27d91602dca"
+api_key = "16614d4b80594ffeb8d440015609d340"
 f = open('states.json')
 
 states = json.load(f)

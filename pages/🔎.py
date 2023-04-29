@@ -2,7 +2,7 @@ from datetime import date
 import requests
 import streamlit as st
 
-apiKey = '8d40a72404ec4f20bc701b1afb95c89e'
+apiKey = '7e11b8f6cbf740f69e253605a9b4eea0'
 
 st.markdown(
     """
@@ -53,10 +53,6 @@ if text_input and date1:
             st.header(article['title'])
             st.markdown(
                 f"<span style='background-color:{a};padding:10px;border-radius:'> "
-            )
-            st.color_picker()
-            st.markdown(
-                f"<span style='background-color:#770;padding:10px;border-radius:'> "
                 f"Published at: {article['publishedAt']}</span>",
                 unsafe_allow_html=True)
             if article["urlToImage"]:

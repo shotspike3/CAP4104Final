@@ -9,7 +9,7 @@ data = json.load(f)
 
 # import pycountry
 # from api import apiKEY
-apiKey = 'dec30b01a0414f7faa17f27d91602dca'
+apiKey = '7e11b8f6cbf740f69e253605a9b4eea0'
 
 
 st.markdown(
@@ -27,7 +27,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.title('News Stats')
+
 tab1, tab2 = st.tabs(["Top Articles in the Country", "Top Articles by State"])
 
 with tab1:
